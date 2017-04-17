@@ -1,5 +1,5 @@
 {
-  "name": "unfetch",
+  "name": "unfetch-pinkie",
   "version": "2.1.2",
   "description": "Bare minimum fetch polyfill in 500 bytes",
   "main": "dist/unfetch.js",
@@ -8,11 +8,11 @@
   "umd:main": "dist/unfetch.umd.js",
   "scripts": {
     "test": "eslint src test && mocha --compilers js:babel-register test/**/*.js",
-    "build": "npm-run-all --silent clean -p rollup:* -p minify:* -s size",
+    "build": "npm-run-all --silent clean -p rollup:*",
     "clean": "rimraf dist && mkdirp dist",
-    "rollup:cjs": "cross-env FORMAT=cjs rollup -c rollup.config.js -f cjs -n $npm_package_name -o $npm_package_main",
-    "rollup:umd": "cross-env FORMAT=umd rollup -c rollup.config.js -f umd -n $npm_package_name -o $npm_package_umd_main",
-    "rollup:esm": "rollup -c rollup.config.js -f es -n $npm_package_name -o $npm_package_module",
+    "rollup:cjs": "cross-env FORMAT=cjs rollup -c rollup.config.js -f cjs -n unfetch -o dist/unfetch.js",
+    "rollup:umd": "cross-env FORMAT=umd rollup -c rollup.config.js -f umd -n unfetch -o dist/unfetch.umd.js",
+    "rollup:esm": "rollup -c rollup.config.js -f es -n unfetch -o dist/unfetch.es.js",
     "minify:cjs": "uglifyjs $npm_package_main -cm toplevel -o $npm_package_main -p relative --in-source-map ${npm_package_main}.map --source-map ${npm_package_main}.map",
     "minify:umd": "uglifyjs $npm_package_umd_main -cm -o $npm_package_umd_main -p relative --in-source-map ${npm_package_umd_main}.map --source-map ${npm_package_umd_main}.map",
     "size": "echo \"Gzipped Size: $(strip-json-comments --no-whitespace $npm_package_main | gzip-size)\"",
@@ -70,5 +70,8 @@
     "sinon-chai": "^2.8.0",
     "strip-json-comments-cli": "^1.0.1",
     "uglify-js": "^2.6.2"
+  },
+  "dependencies": {
+    "pinkie-promise": "^2.0.1"
   }
 }

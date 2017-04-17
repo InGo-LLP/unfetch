@@ -1,4 +1,6 @@
-export default typeof fetch=='function' ? fetch : function(url, options) {
+import Promise from 'pinkie-promise';
+
+export default function unfetch(url, options) {
 	options = options || {};
 	return new Promise( (resolve, reject) => {
 		let request = new XMLHttpRequest();
